@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Reply.init({
-    reply: DataTypes.STRING
+    reply: DataTypes.STRING,
+    id_post: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Reply',

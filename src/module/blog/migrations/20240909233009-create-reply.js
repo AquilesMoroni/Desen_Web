@@ -2,12 +2,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Replies', {
+    const table = {tableName: "reply", schema: "public"};
+    await queryInterface.createTable(table, {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },
+      id_post: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            schema: "public",
+            tableName: "post",
+          },
+          key: "id",
+        }
       },
       reply: {
         type: Sequelize.STRING
@@ -23,6 +35,7 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Replies');
+    const table = {tableName: "reply", schema: "public"}; 
+    await queryInterface.dropTable(table);
   }
 };
